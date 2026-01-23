@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WonderCraft SMP • Best Survival</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d0d0d">
+<link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+/* --- ROOT VARIABLES (WonderCraft Theme) --- */
+:root {
+  --bg: #0a0a0a;
+  --bg2: #1a1215;
+  --sakura: #ffb7c5;
+  --gold: #FFD700;
+  --gold-dark: #B8860B;
+  --glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 183, 197, 0.15);
+  --text: #ffffff;
+  --muted: #a0a0a0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Space Grotesk", sans-serif; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at top, var(--bg2) 0%, var(--bg) 70%);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* --- FALLING PETALS --- */
+.petal {
+  position: fixed;
+  top: -10%;
+  background-color: var(--sakura);
+  border-radius: 10px 0 10px 10px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  0% { transform: translateY(0vh) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- NAVIGATION --- */
+.page-nav {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 999;
+}
+.page-nav a {
+  padding: 10px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+.page-nav .active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #000;
+  border: none;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  min-height: 100vh;
+  padding: 120px 10% 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+.site-logo {
+  width: 140px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 30px rgba(255, 183, 197, 0.2));
+}
+.hero h1 { font-size: 4.5rem; font-weight: 900; letter-spacing: -2px; font-style: italic; text-transform: uppercase; }
+.gold-gradient {
+  background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p { color: var(--muted); max-width: 600px; margin: 20px 0; font-weight: 600; line-height: 1.6; }
+
+/* --- CENTERED RANK BOX (Main Action) --- */
+.main-rank-portal {
+  margin: 40px 0;
+  width: 100%;
+  max-width: 400px;
+}
+.shop-box {
+  background: var(--glass);
+  border: 2px solid var(--border);
+  padding: 40px;
+  border-radius: 3rem;
+  backdrop-filter: blur(15px);
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: block;
+  text-decoration: none;
+}
+.shop-box:hover {
+  transform: translateY(-10px);
+  border-color: var(--gold);
+  box-shadow: 0 20px 50px rgba(255, 215, 0, 0.1);
+}
+.shop-box i { font-size: 4rem; color: var(--gold); margin-bottom: 20px; }
+.shop-box h3 { font-size: 2rem; font-weight: 900; color: #fff; text-transform: uppercase; font-style: italic; }
+
+/* --- REDIRECT NAVIGATION BAR --- */
+.nav-redirect-bar {
+  display: flex;
+  flex-direction: column;
+  md-flex-direction: row;
+  gap: 15px;
+  background: rgba(0,0,0,0.4);
+  padding: 15px;
+  border-radius: 2rem;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+}
+.redirect-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 25px;
+  border-radius: 1.2rem;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.btn-matrix { background: rgba(255, 183, 197, 0.05); border: 1px solid var(--border); }
+.btn-matrix:hover { background: rgba(255, 183, 197, 0.15); }
+.btn-purchase { background: var(--gold); color: #000; font-weight: 900; }
+
+/* --- STAFF & SECTIONS --- */
+section { padding: 80px 10%; position: relative; z-index: 10; }
+.title { text-align: center; font-size: 3rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; font-style: italic; }
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+.staff-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  padding: 30px;
+  text-align: center;
+  transition: 0.3s;
+}
+.staff-card img { width: 100px; border-radius: 1.5rem; margin-bottom: 15px; border: 2px solid var(--border); }
+.staff-role { 
+  display: inline-block; 
+  margin: 10px 0; 
+  padding: 5px 15px; 
+  border-radius: 999px; 
+  background: var(--sakura); 
+  color: #000; 
+  font-weight: 800; 
+  font-size: 0.7rem; 
+  text-transform: uppercase; 
+}
+
+/* Footer */
+footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 3rem; }
+  .nav-redirect-bar { flex-direction: column; width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petal-container"></div>
+
+<nav class="page-nav">
+  <a class="active">Home</a>
+  <a href="rules.html">Rules</a>
+  <a href="rank.html">Store</a>
+</nav>
+
+<header class="hero">
+  <img src="assets/logo.png" class="site-logo" alt="WonderCraft SMP Logo">
+  
+  <h1 class="gold-gradient">WONDERCRAFT</h1>
+  <p>The premium Sakura-themed Survival Experience. Join a lag-free community focused on performance and fair gameplay.</p>
+
+  <div class="main-rank-portal">
+    <a href="rank.html" class="shop-box">
+        <i class="fas fa-crown"></i>
+        <h3>Ranks</h3>
+        <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; color: var(--sakura)">Upgrade Your Status</p>
+    </a>
+  </div>
+
+  <div class="nav-redirect-bar flex flex-col md:flex-row">
+    <a href="Compare.html" class="redirect-btn btn-matrix">
+        <i class="fas fa-layer-group text-pink-300"></i>
+        <div class="text-left">
+            <p style="font-size: 10px; font-weight: 900; color: #fff; margin:0">PERMISSION MATRIX</p>
+            <p style="font-size: 8px; font-weight: 700; color: var(--sakura); margin:0">COMPARE COMMANDS</p>
+        </div>
+    </a>
+    <a href="rank.html" class="redirect-btn btn-purchase">
+        <i class="fas fa-shopping-basket"></i>
+        <div class="text-left">
+            <p style="font-size: 10px; font-weight: 900; margin:0">INSTANT PURCHASE</p>
+            <p style="font-size: 8px; font-weight: 700; opacity: 0.7; margin:0">VISIT RANK STORE</p>
+        </div>
+    </a>
+  </div>
+</header>
+
+<section id="staff">
+  <h2 class="title">Our <span class="text-yellow-500">Team</span></h2>
+  <div class="staff-grid">
+    <div class="staff-card">
+      <img src="staff/khanjan.png" alt="Khanjan">
+      <div class="font-black">Khanjan Deka</div>
+      <div class="staff-role">Owner / Visionary</div>
+      <p class="text-[11px] text-gray-500 leading-relaxed">Handles major server decisions and long-term community planning.</p>
+    </div>
+    <div class="staff-card">
+      <img src="staff/shruti.png" alt="Shruti">
+      <div class="font-black">Shruti Singh</div>
+      <div class="staff-role">Lead Developer</div>
+      <p class="text-[11px] text-gray-500 leading-relaxed">Backend architecture, security, and performance optimization.</p>
+    </div>
+    <div class="staff-card">
+      <img src="staff/nikhil.png" alt="Nikhil">
+      <div class="font-black">Nikhil</div>
+      <div class="staff-role">Developer</div>
+      <p class="text-[11px] text-gray-500 leading-relaxed">Custom plugin management and gameplay feature development.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 WONDERCRAFT SMP • DESIGNED BY NEXUS
+</footer>
+
+<script>
+/* Sakura Petals Script */
+const container = document.getElementById('petal-container');
+function createPetal() {
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.width = Math.random() * 8 + 4 + 'px';
+  petal.style.height = petal.style.width;
+  petal.style.animationDuration = Math.random() * 3 + 5 + 's';
+  container.appendChild(petal);
+  setTimeout(() => { petal.remove(); }, 6000);
+}
+setInterval(createPetal, 400);
+</script>
+
+</body>
+</html>
