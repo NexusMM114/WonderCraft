@@ -9,7 +9,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
 <style>
-/* --- ROOT VARIABLES (WonderCraft Theme) --- */
+/* --- ROOT VARIABLES --- */
 :root {
   --bg: #0a0a0a;
   --bg2: #1a1215;
@@ -30,6 +30,7 @@ body {
   background-image: radial-gradient(circle at top, var(--bg2) 0%, var(--bg) 70%);
   color: var(--text);
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* --- FALLING PETALS --- */
@@ -66,7 +67,7 @@ body {
   background: var(--glass);
   border: 1px solid var(--border);
   backdrop-filter: blur(10px);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   transition: 0.3s;
 }
 .page-nav .active {
@@ -78,113 +79,117 @@ body {
 /* --- HERO SECTION --- */
 .hero {
   min-height: 100vh;
-  padding: 120px 10% 60px;
+  padding: 100px 10% 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   position: relative;
-  z-index: 10;
 }
 .site-logo {
-  width: 140px;
+  width: 120px;
   margin-bottom: 20px;
-  filter: drop-shadow(0 0 30px rgba(255, 183, 197, 0.2));
+  filter: drop-shadow(0 0 20px rgba(255, 183, 197, 0.3));
 }
-.hero h1 { font-size: 4.5rem; font-weight: 900; letter-spacing: -2px; font-style: italic; text-transform: uppercase; }
+.hero h1 { font-size: 4rem; font-weight: 900; letter-spacing: -2px; font-style: italic; text-transform: uppercase; line-height: 1; }
 .gold-gradient {
   background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.hero p { color: var(--muted); max-width: 600px; margin: 20px 0; font-weight: 600; line-height: 1.6; }
 
-/* --- CENTERED RANK BOX (Main Action) --- */
+/* --- CLICKABLE RANK BOX --- */
 .main-rank-portal {
   margin: 40px 0;
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
+  position: relative;
+  z-index: 100; /* High z-index to ensure clickability */
 }
 .shop-box {
-  background: var(--glass);
+  background: rgba(255, 255, 255, 0.03);
   border: 2px solid var(--border);
-  padding: 40px;
+  padding: 50px 30px;
   border-radius: 3rem;
   backdrop-filter: blur(15px);
   transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: block;
   text-decoration: none;
+  cursor: pointer;
 }
 .shop-box:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
   border-color: var(--gold);
-  box-shadow: 0 20px 50px rgba(255, 215, 0, 0.1);
+  box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
 }
-.shop-box i { font-size: 4rem; color: var(--gold); margin-bottom: 20px; }
-.shop-box h3 { font-size: 2rem; font-weight: 900; color: #fff; text-transform: uppercase; font-style: italic; }
+.shop-box i { font-size: 4rem; color: var(--gold); margin-bottom: 20px; display: block; }
+.shop-box h3 { font-size: 2.2rem; font-weight: 900; color: #fff; text-transform: uppercase; font-style: italic; }
 
-/* --- REDIRECT NAVIGATION BAR --- */
+/* --- REDIRECT NAV BAR --- */
 .nav-redirect-bar {
   display: flex;
   flex-direction: column;
-  md-flex-direction: row;
   gap: 15px;
-  background: rgba(0,0,0,0.4);
-  padding: 15px;
-  border-radius: 2rem;
+  background: rgba(0,0,0,0.5);
+  padding: 12px;
+  border-radius: 2.2rem;
   border: 1px solid var(--border);
   backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 100;
 }
+@media (min-width: 768px) {
+    .nav-redirect-bar { flex-direction: row; }
+}
+
 .redirect-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 25px;
-  border-radius: 1.2rem;
+  gap: 15px;
+  padding: 14px 28px;
+  border-radius: 1.5rem;
   text-decoration: none;
   transition: 0.3s;
 }
 .btn-matrix { background: rgba(255, 183, 197, 0.05); border: 1px solid var(--border); }
-.btn-matrix:hover { background: rgba(255, 183, 197, 0.15); }
+.btn-matrix:hover { background: rgba(255, 183, 197, 0.15); border-color: var(--sakura); }
 .btn-purchase { background: var(--gold); color: #000; font-weight: 900; }
+.btn-purchase:hover { filter: brightness(1.1); transform: scale(1.02); }
 
-/* --- STAFF & SECTIONS --- */
-section { padding: 80px 10%; position: relative; z-index: 10; }
-.title { text-align: center; font-size: 3rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; font-style: italic; }
+/* --- SECTIONS --- */
+section { padding: 90px 10%; position: relative; z-index: 10; }
+.title { text-align: center; font-size: 2.8rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; font-style: italic; }
+
 .staff-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  gap: 30px;
 }
 .staff-card {
   background: var(--glass);
   border: 1px solid var(--border);
-  border-radius: 2rem;
-  padding: 30px;
+  border-radius: 2.5rem;
+  padding: 40px 30px;
   text-align: center;
-  transition: 0.3s;
+  transition: 0.4s;
 }
-.staff-card img { width: 100px; border-radius: 1.5rem; margin-bottom: 15px; border: 2px solid var(--border); }
+.staff-card:hover { transform: translateY(-10px); border-color: var(--sakura); }
+.staff-card img { width: 110px; height: 110px; border-radius: 2rem; margin-bottom: 20px; border: 2px solid var(--border); object-fit: cover; }
 .staff-role { 
   display: inline-block; 
-  margin: 10px 0; 
-  padding: 5px 15px; 
+  margin: 12px 0; 
+  padding: 6px 16px; 
   border-radius: 999px; 
   background: var(--sakura); 
   color: #000; 
   font-weight: 800; 
-  font-size: 0.7rem; 
+  font-size: 0.65rem; 
   text-transform: uppercase; 
+  letter-spacing: 1px;
 }
 
-/* Footer */
-footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
-
-@media (max-width: 768px) {
-  .hero h1 { font-size: 3rem; }
-  .nav-redirect-bar { flex-direction: column; width: 100%; }
-}
+footer { padding: 60px 20px; text-align: center; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 </style>
 </head>
 
@@ -199,67 +204,69 @@ footer { text-align: center; padding: 40px; border-top: 1px solid var(--border);
 </nav>
 
 <header class="hero">
-  <img src="assets/logo.png" class="site-logo" alt="WonderCraft SMP Logo">
+  <img src="assets/logo.png" class="site-logo" alt="WonderCraft Logo">
   
-  <h1 class="gold-gradient">WONDERCRAFT</h1>
-  <p>The premium Sakura-themed Survival Experience. Join a lag-free community focused on performance and fair gameplay.</p>
+  <h1 class="gold-gradient italic">WONDERCRAFT</h1>
+  <p style="color: #8fcfc8; max-width: 600px; margin: 15px 0; font-weight: 600;">The ultimate Sakura-themed survival network. Join a fast, secure, and community-driven server today.</p>
 
   <div class="main-rank-portal">
     <a href="rank.html" class="shop-box">
         <i class="fas fa-crown"></i>
         <h3>Ranks</h3>
-        <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; color: var(--sakura)">Upgrade Your Status</p>
+        <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 3px; margin-top: 10px; color: var(--sakura); font-weight: 800;">
+          Unlock Premium Status
+        </p>
     </a>
   </div>
 
-  <div class="nav-redirect-bar flex flex-col md:flex-row">
+  <div class="nav-redirect-bar">
     <a href="Compare.html" class="redirect-btn btn-matrix">
         <i class="fas fa-layer-group text-pink-300"></i>
         <div class="text-left">
-            <p style="font-size: 10px; font-weight: 900; color: #fff; margin:0">PERMISSION MATRIX</p>
-            <p style="font-size: 8px; font-weight: 700; color: var(--sakura); margin:0">COMPARE COMMANDS</p>
+            <p style="font-size: 10px; font-weight: 900; color: #fff; margin:0; line-height:1;">PERMISSION MATRIX</p>
+            <p style="font-size: 8px; font-weight: 700; color: var(--sakura); margin:0; margin-top:4px;">COMPARE COMMANDS</p>
         </div>
     </a>
     <a href="rank.html" class="redirect-btn btn-purchase">
         <i class="fas fa-shopping-basket"></i>
         <div class="text-left">
-            <p style="font-size: 10px; font-weight: 900; margin:0">INSTANT PURCHASE</p>
-            <p style="font-size: 8px; font-weight: 700; opacity: 0.7; margin:0">VISIT RANK STORE</p>
+            <p style="font-size: 10px; font-weight: 900; margin:0; line-height:1;">INSTANT PURCHASE</p>
+            <p style="font-size: 8px; font-weight: 700; opacity: 0.7; margin:0; margin-top:4px;">VISIT RANK STORE</p>
         </div>
     </a>
   </div>
 </header>
 
 <section id="staff">
-  <h2 class="title">Our <span class="text-yellow-500">Team</span></h2>
+  <h2 class="title italic">The <span class="gold-gradient">Team</span></h2>
   <div class="staff-grid">
     <div class="staff-card">
-      <img src="staff/khanjan.png" alt="Khanjan">
-      <div class="font-black">Khanjan Deka</div>
-      <div class="staff-role">Owner / Visionary</div>
-      <p class="text-[11px] text-gray-500 leading-relaxed">Handles major server decisions and long-term community planning.</p>
+      <img src="staff/khanjan.png" alt="Owner">
+      <div style="font-weight: 900; font-size: 1.2rem;">Khanjan Deka</div>
+      <div class="staff-role">Owner</div>
+      <p style="font-size: 0.8rem; color: #888; line-height: 1.6;">Leads the server vision, major expansions, and overall community management.</p>
     </div>
     <div class="staff-card">
-      <img src="staff/shruti.png" alt="Shruti">
-      <div class="font-black">Shruti Singh</div>
+      <img src="staff/shruti.png" alt="Developer">
+      <div style="font-weight: 900; font-size: 1.2rem;">Shruti Singh</div>
       <div class="staff-role">Lead Developer</div>
-      <p class="text-[11px] text-gray-500 leading-relaxed">Backend architecture, security, and performance optimization.</p>
+      <p style="font-size: 0.8rem; color: #888; line-height: 1.6;">Manages backend architecture, performance optimization, and server security.</p>
     </div>
     <div class="staff-card">
-      <img src="staff/nikhil.png" alt="Nikhil">
-      <div class="font-black">Nikhil</div>
+      <img src="staff/nikhil.png" alt="Developer">
+      <div style="font-weight: 900; font-size: 1.2rem;">Nikhil</div>
       <div class="staff-role">Developer</div>
-      <p class="text-[11px] text-gray-500 leading-relaxed">Custom plugin management and gameplay feature development.</p>
+      <p style="font-size: 0.8rem; color: #888; line-height: 1.6;">Handles plugin configurations, custom gameplay features, and technical support.</p>
     </div>
   </div>
 </section>
 
 <footer>
-  © 2026 WONDERCRAFT SMP • DESIGNED BY NEXUS
+  © 2026 WONDERCRAFT SMP • DESIGNED BY SHRUTI SINGH
 </footer>
 
 <script>
-/* Sakura Petals Script */
+/* SAKURA PETALS GENERATOR */
 const container = document.getElementById('petal-container');
 function createPetal() {
   const petal = document.createElement('div');
