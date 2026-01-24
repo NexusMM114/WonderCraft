@@ -1,285 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>WonderCraft SMP • Best Survival</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d0d0d">
-<link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WonderCraft SMP • The Golden Era</title>
+    
+    <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-/* --- ROOT VARIABLES --- */
-:root {
-  --bg: #0a0a0a;
-  --bg2: #1a1215;
-  --sakura: #ffb7c5;
-  --gold: #FFD700;
-  --gold-dark: #B8860B;
-  --glass: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 183, 197, 0.15);
-  --text: #ffffff;
-  --muted: #a0a0a0;
-}
+    <style>
+        /* --- 1. Core Variables & Setup --- */
+        :root {
+          --bg: #0a0a0a;
+          --bg-sakura: #1a1215;
+          --sakura: #ffb7c5;
+          --gold: #FFD700;
+          --gold-dark: #B8860B;
+          --glass: rgba(255, 255, 255, 0.05);
+          --border: rgba(255, 183, 197, 0.15);
+          --text: #ffffff;
+          --muted: #a0a0a0;
+          --king-red: #ef4444;
+        }
 
-* { margin:0; padding:0; box-sizing:border-box; font-family:"Space Grotesk", sans-serif; }
-html { scroll-behavior: smooth; }
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Space Grotesk", sans-serif;
+        }
 
-body {
-  background-color: var(--bg);
-  background-image: radial-gradient(circle at top, var(--bg2) 0%, var(--bg) 70%);
-  color: var(--text);
-  overflow-x: hidden;
-  min-height: 100vh;
-}
+        body {
+          background-color: var(--bg);
+          background-image: radial-gradient(circle at top, var(--bg-sakura) 0%, var(--bg) 70%);
+          color: var(--text);
+          overflow-x: hidden;
+          min-height: 100vh;
+        }
 
-/* --- FALLING PETALS --- */
-.petal {
-  position: fixed;
-  top: -10%;
-  background-color: var(--sakura);
-  border-radius: 10px 0 10px 10px;
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 1;
-  animation: fall linear infinite;
-}
-@keyframes fall {
-  0% { transform: translateY(0vh) rotate(0deg); opacity: 0.8; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-}
+        /* --- 2. Animations (Sakura Petals) --- */
+        .petal {
+          position: fixed;
+          top: -10%;
+          background-color: var(--sakura);
+          border-radius: 10px 0 10px 10px;
+          opacity: 0.3;
+          pointer-events: none;
+          z-index: 1;
+          animation: fall linear infinite;
+        }
 
-/* --- NAVIGATION --- */
-.page-nav {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  gap: 10px;
-  z-index: 999;
-}
-.page-nav a {
-  padding: 10px 20px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 700;
-  color: var(--text);
-  background: var(--glass);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-  font-size: 0.75rem;
-  transition: 0.3s;
-}
-.page-nav .active {
-  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-  color: #000;
-  border: none;
-}
+        @keyframes fall {
+          0% { transform: translateY(0vh) rotate(0deg); opacity: 0.8; }
+          100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
 
-/* --- HERO SECTION --- */
-.hero {
-  min-height: 100vh;
-  padding: 100px 10% 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-}
-.site-logo {
-  width: 120px;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 20px rgba(255, 183, 197, 0.3));
-}
-.hero h1 { font-size: 4rem; font-weight: 900; letter-spacing: -2px; font-style: italic; text-transform: uppercase; line-height: 1; }
-.gold-gradient {
-  background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+        /* --- 3. Typography & Gradients --- */
+        .gold-gradient {
+          background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: 800;
+        }
 
-/* --- CLICKABLE RANK BOX --- */
-.main-rank-portal {
-  margin: 40px 0;
-  width: 100%;
-  max-width: 360px;
-  position: relative;
-  z-index: 100; /* High z-index to ensure clickability */
-}
-.shop-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 2px solid var(--border);
-  padding: 50px 30px;
-  border-radius: 3rem;
-  backdrop-filter: blur(15px);
-  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  display: block;
-  text-decoration: none;
-  cursor: pointer;
-}
-.shop-box:hover {
-  transform: translateY(-12px);
-  border-color: var(--gold);
-  box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
-}
-.shop-box i { font-size: 4rem; color: var(--gold); margin-bottom: 20px; display: block; }
-.shop-box h3 { font-size: 2.2rem; font-weight: 900; color: #fff; text-transform: uppercase; font-style: italic; }
+        .italic { font-style: italic; }
 
-/* --- REDIRECT NAV BAR --- */
-.nav-redirect-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  background: rgba(0,0,0,0.5);
-  padding: 12px;
-  border-radius: 2.2rem;
-  border: 1px solid var(--border);
-  backdrop-filter: blur(20px);
-  position: relative;
-  z-index: 100;
-}
-@media (min-width: 768px) {
-    .nav-redirect-bar { flex-direction: row; }
-}
+        /* --- 4. Navigation --- */
+        .page-nav {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          display: flex;
+          gap: 10px;
+          z-index: 999;
+        }
 
-.redirect-btn {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 14px 28px;
-  border-radius: 1.5rem;
-  text-decoration: none;
-  transition: 0.3s;
-}
-.btn-matrix { background: rgba(255, 183, 197, 0.05); border: 1px solid var(--border); }
-.btn-matrix:hover { background: rgba(255, 183, 197, 0.15); border-color: var(--sakura); }
-.btn-purchase { background: var(--gold); color: #000; font-weight: 900; }
-.btn-purchase:hover { filter: brightness(1.1); transform: scale(1.02); }
+        .page-nav a {
+          padding: 10px 20px;
+          border-radius: 999px;
+          text-decoration: none;
+          font-weight: 700;
+          color: var(--text);
+          background: var(--glass);
+          border: 1px solid var(--border);
+          backdrop-filter: blur(10px);
+          font-size: 0.75rem;
+          transition: 0.3s;
+        }
 
-/* --- SECTIONS --- */
-section { padding: 90px 10%; position: relative; z-index: 10; }
-.title { text-align: center; font-size: 2.8rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; font-style: italic; }
+        .page-nav .active {
+          background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+          color: #000;
+          border: none;
+        }
 
-.staff-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-.staff-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 2.5rem;
-  padding: 40px 30px;
-  text-align: center;
-  transition: 0.4s;
-}
-.staff-card:hover { transform: translateY(-10px); border-color: var(--sakura); }
-.staff-card img { width: 110px; height: 110px; border-radius: 2rem; margin-bottom: 20px; border: 2px solid var(--border); object-fit: cover; }
-.staff-role { 
-  display: inline-block; 
-  margin: 12px 0; 
-  padding: 6px 16px; 
-  border-radius: 999px; 
-  background: var(--sakura); 
-  color: #000; 
-  font-weight: 800; 
-  font-size: 0.65rem; 
-  text-transform: uppercase; 
-  letter-spacing: 1px;
-}
+        /* --- 5. Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
 
-footer { padding: 60px 20px; text-align: center; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
-</style>
+        .site-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 25px var(--sakura));
+        }
+
+        /* --- 6. The Matrix Card System --- */
+        section { padding: 80px 10%; position: relative; z-index: 2; }
+        .title { text-align: center; font-size: 2.8rem; margin-bottom: 50px; }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+          justify-content: center;
+        }
+
+        .card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 2px solid var(--border);
+          padding: 40px 30px;
+          border-radius: 3rem;
+          backdrop-filter: blur(15px);
+          transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          text-align: center;
+        }
+
+        .card:hover {
+          transform: translateY(-12px);
+          border-color: var(--gold);
+          box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
+        }
+
+        .card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 2rem;
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            object-fit: cover;
+        }
+
+        /* --- 7. Buttons & Tiers --- */
+        .btn-gold {
+          background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+          color: #000;
+          font-weight: 900;
+          text-transform: uppercase;
+          border: none;
+          padding: 14px 30px;
+          border-radius: 999px;
+          cursor: pointer;
+          text-decoration: none;
+          display: inline-block;
+          transition: 0.3s;
+          font-size: 0.85rem;
+        }
+
+        .btn-gold:hover {
+          filter: brightness(1.1);
+          transform: scale(1.05);
+          box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .role-pill {
+            display: inline-block;
+            padding: 4px 15px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+        }
+
+        .text-emperor { color: var(--gold); }
+        .text-king { color: var(--king-red); text-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+    </style>
 </head>
 
 <body>
 
-<div id="petal-container"></div>
+    <nav class="page-nav">
+        <a href="index.html" class="active">HOME</a>
+        <a href="rules.html">RULES</a>
+        <a href="store.html">STORE</a>
+    </nav>
 
-<nav class="page-nav">
-  <a class="active">Home</a>
-  <a href="rules.html">Rules</a>
-  <a href="rank.html">Store</a>
-</nav>
-
-<header class="hero">
-  <img src="assets/logo.png" class="site-logo" alt="WonderCraft Logo">
-  
-  <h1 class="gold-gradient italic">WONDERCRAFT</h1>
-  <p style="color: #8fcfc8; max-width: 600px; margin: 15px 0; font-weight: 600;">The ultimate Sakura-themed survival network. Join a fast, secure, and community-driven server today.</p>
-
-  <div class="main-rank-portal">
-    <a href="rank.html" class="shop-box">
-        <i class="fas fa-crown"></i>
-        <h3>Ranks</h3>
-        <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 3px; margin-top: 10px; color: var(--sakura); font-weight: 800;">
-          Unlock Premium Status
-        </p>
-    </a>
-  </div>
-
-  <div class="nav-redirect-bar">
-    <a href="Compare.html" class="redirect-btn btn-matrix">
-        <i class="fas fa-layer-group text-pink-300"></i>
-        <div class="text-left">
-            <p style="font-size: 10px; font-weight: 900; color: #fff; margin:0; line-height:1;">PERMISSION MATRIX</p>
-            <p style="font-size: 8px; font-weight: 700; color: var(--sakura); margin:0; margin-top:4px;">COMPARE COMMANDS</p>
+    <header class="hero">
+        <img src="1000023772.png" class="site-logo" alt="WonderCraft SMP Logo">
+        <h1 class="gold-gradient" style="font-size: 4.5rem;">WONDERCRAFT SMP</h1>
+        <p class="italic" style="color: var(--sakura); font-size: 1.1rem; letter-spacing: 1px;">Survival, Refined. The Golden Era Begins.</p>
+        
+        <div style="margin-top: 40px;">
+            <p style="margin-bottom: 15px; font-weight: 700; color: var(--gold);">🌐 play.wondercraft.in</p>
+            <a href="store.html" class="btn-gold">Explore the Store</a>
         </div>
-    </a>
-    <a href="rank.html" class="redirect-btn btn-purchase">
-        <i class="fas fa-shopping-basket"></i>
-        <div class="text-left">
-            <p style="font-size: 10px; font-weight: 900; margin:0; line-height:1;">INSTANT PURCHASE</p>
-            <p style="font-size: 8px; font-weight: 700; opacity: 0.7; margin:0; margin-top:4px;">VISIT RANK STORE</p>
+    </header>
+
+    <section id="staff">
+        <h2 class="title gold-gradient">Management Team</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="khanjan.png" alt="Khanjan">
+                <div class="role-pill text-emperor">OWNER</div>
+                <h3>Khanjan Deka ♡</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Visionary Founder</p>
+            </div>
+
+            <div class="card">
+                <img src="shruti.png" alt="Shruti">
+                <div class="role-pill" style="color: #60a5fa;">DEVELOPER</div>
+                <h3>Shruti Singh ♡</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Systems Architect</p>
+            </div>
+
+            <div class="card">
+                <img src="nikhil.png" alt="Nikhil">
+                <div class="role-pill" style="color: #60a5fa;">DEVELOPER</div>
+                <h3>Nikhil</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Backend Lead</p>
+            </div>
+
+            <div class="card">
+                <img src="anshul.png" alt="Anshul">
+                <div class="role-pill text-king">SENIOR ADMIN</div>
+                <h3>Anshul</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Operations Lead</p>
+            </div>
         </div>
-    </a>
-  </div>
-</header>
+    </section>
 
-<section id="staff">
-  <h2 class="title italic">The <span class="gold-gradient">Team</span></h2>
-  <div class="staff-grid">
-    <div class="staff-card">
-      <img src="staff/khanjan.png" alt="Owner">
-      <div style="font-weight: 900; font-size: 1.2rem;">Khanjan Deka</div>
-      <div class="staff-role">Owner</div>
-      <p style="font-size: 0.8rem; color: #888; line-height: 1.6;">Leads the server vision, major expansions, and overall community management.</p>
-    </div>
-    <div class="staff-card">
-      <img src="staff/shruti.png" alt="Developer">
-      <div style="font-weight: 900; font-size: 1.2rem;">Shruti Singh</div>
-      <div class="staff-role">Lead Developer</div>
-      <p style="font-size: 0.8rem; color: #888; line-height: 1.6;">Manages backend architecture, performance optimization, and server security.</p>
-    </div>
-    <div class="staff-card">
-      <img src="staff/nikhil.png" alt="Developer">
-      <div style="font-weight: 900; font-size: 1.2rem;">Nikhil</div>
-      <div class="staff-role">Developer</div>
-      <p style="font-size: 0.8rem; color: #888; line-height: 1.6;">Handles plugin configurations, custom gameplay features, and technical support.</p>
-    </div>
-  </div>
-</section>
+    <section id="creators">
+        <h2 class="title gold-gradient">Official YouTubers</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="prax.png" alt="PraKSH19">
+                <div class="role-pill" style="color: var(--sakura);">YOUTUBER</div>
+                <h3>PraKSH19 GAMing ✔</h3>
+                <a href="https://youtube.com/@praksh19gaming" class="btn-gold" style="margin-top: 15px;">▶ Channel</a>
+            </div>
 
-<footer>
-  © 2026 WONDERCRAFT SMP • DESIGNED BY SHRUTI SINGH
-</footer>
+            <div class="card">
+                <img src="arpit.png" alt="Tiger Arpit">
+                <div class="role-pill" style="color: var(--sakura);">YOUTUBER</div>
+                <h3>Tiger Arpit Gaming ✔</h3>
+                <a href="https://youtube.com/@Tiger_Arpit_Gamingz" class="btn-gold" style="margin-top: 15px;">▶ Channel</a>
+            </div>
+        </div>
+    </section>
 
-<script>
-/* SAKURA PETALS GENERATOR */
-const container = document.getElementById('petal-container');
-function createPetal() {
-  const petal = document.createElement('div');
-  petal.className = 'petal';
-  petal.style.left = Math.random() * 100 + 'vw';
-  petal.style.width = Math.random() * 8 + 4 + 'px';
-  petal.style.height = petal.style.width;
-  petal.style.animationDuration = Math.random() * 3 + 5 + 's';
-  container.appendChild(petal);
-  setTimeout(() => { petal.remove(); }, 6000);
-}
-setInterval(createPetal, 400);
-</script>
+    <footer>
+        <p>&copy; 2026 WonderCraft SMP • Hand-crafted by <span class="gold-gradient">Shruti Singh</span></p>
+    </footer>
 
+    <script>
+        // Sakura Petal Generator
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.width = Math.random() * 10 + 5 + 'px';
+            petal.style.height = petal.style.width;
+            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 5000);
+        }
+        setInterval(createPetal, 350);
+    </script>
 </body>
 </html>
