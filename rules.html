@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WonderCraft SMP • Official Rules</title>
+    <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. Your Core CSS Variables & Setup --- */
+        :root {
+          --bg: #0a0a0a;
+          --bg-sakura: #1a1215;
+          --sakura: #ffb7c5;
+          --gold: #FFD700;
+          --gold-dark: #B8860B;
+          --glass: rgba(255, 255, 255, 0.05);
+          --border: rgba(255, 183, 197, 0.15);
+          --text: #ffffff;
+          --muted: #a0a0a0;
+          --king-red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Space Grotesk", sans-serif; }
+
+        body {
+          background-color: var(--bg);
+          background-image: radial-gradient(circle at top, var(--bg-sakura) 0%, var(--bg) 70%);
+          color: var(--text);
+          overflow-x: hidden;
+          min-height: 100vh;
+        }
+
+        /* --- 2. Animations (Sakura Petals) --- */
+        .petal {
+          position: fixed;
+          top: -10%;
+          background-color: var(--sakura);
+          border-radius: 10px 0 10px 10px;
+          opacity: 0.3;
+          pointer-events: none;
+          z-index: 1;
+          animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+          0% { transform: translateY(0vh) rotate(0deg); opacity: 0.8; }
+          100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- 3. Typography & Navigation --- */
+        .gold-gradient {
+          background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .page-nav {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          display: flex;
+          gap: 10px;
+          z-index: 999;
+        }
+
+        .page-nav a {
+          padding: 10px 20px;
+          border-radius: 999px;
+          text-decoration: none;
+          font-weight: 700;
+          color: var(--text);
+          background: var(--glass);
+          border: 1px solid var(--border);
+          backdrop-filter: blur(10px);
+          font-size: 0.75rem;
+          transition: 0.3s;
+        }
+
+        .page-nav .active {
+          background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+          color: #000;
+          border: none;
+        }
+
+        /* --- 4. Content Containers (Shop Box Style) --- */
+        section { padding: 120px 10% 60px; max-width: 1000px; margin: 0 auto; }
+        
+        .rule-container {
+          background: rgba(255, 255, 255, 0.03);
+          border: 2px solid var(--border);
+          padding: 40px;
+          border-radius: 2.5rem;
+          backdrop-filter: blur(15px);
+          margin-bottom: 30px;
+          transition: 0.4s;
+        }
+
+        .rule-container:hover {
+          border-color: var(--gold);
+          transform: translateY(-5px);
+          box-shadow: 0 15px 40px rgba(255, 215, 0, 0.1);
+        }
+
+        .rule-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        ul { list-style: none; }
+        li { 
+            margin-bottom: 12px; 
+            padding-left: 25px; 
+            position: relative; 
+            color: var(--muted);
+        }
+        li::before {
+            content: "➜";
+            position: absolute;
+            left: 0;
+            color: var(--sakura);
+        }
+
+        /* --- 5. Punishment Table (Matrix Style) --- */
+        .comparison-wrapper {
+          overflow-x: auto;
+          border-radius: 24px;
+          background: rgba(15, 15, 15, 0.5);
+          border: 2px solid var(--border);
+          margin-top: 20px;
+        }
+
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 20px; border-bottom: 1px solid var(--border); }
+        th { color: var(--gold); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; }
+        
+        .text-king { color: var(--king-red); }
+        .text-emperor { color: var(--gold); }
+
+        footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+   <nav class="page-nav">
+    <a href="index.html">Home</a>
+    <a href="rules.html" class="active">Rules</a>
+    <a href="store.html">Store</a>
+</nav>
+
+
+    <section>
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h1 class="gold-gradient" style="font-size: 3.5rem; font-weight: 900;">📜 WonderCraft SMP Rules</h1>
+            <p style="color: var(--sakura); font-style: italic; margin-top: 10px;">A premium survival experience needs clear rules. Read carefully.</p>
+        </div>
+
+        <div class="rule-container">
+            <div class="rule-title"><span class="gold-gradient">📜</span> Agreement Notice</div>
+            <p style="color: var(--muted);">By joining, playing, or participating in <b class="gold-gradient">WonderCraft SMP</b>, you automatically agree to follow all rules listed on this page. Ignorance is not an excuse. Staff decisions are final.</p>
+        </div>
+
+        <div class="rule-container">
+            <div class="rule-title"><span class="gold-gradient">📝</span> General Conduct</div>
+            <ul>
+                <li>Treat all players and staff with respect.</li>
+                <li>No NSFW content, hate speech, or harassment.</li>
+                <li>No spamming, advertising, or self-promotion.</li>
+                <li>Respect privacy and personal information.</li>
+            </ul>
+        </div>
+
+        <div class="rule-container">
+            <div class="rule-title"><span class="gold-gradient">🌍</span> SMP Gameplay Rules</div>
+            <ul>
+                <li>No cheating, hacking, or exploiting bugs.</li>
+                <li>No griefing, stealing, or scamming.</li>
+                <li>PvP must be fair and mutual.</li>
+                <li>Respect community builds and claims.</li>
+            </ul>
+        </div>
+
+        <div class="rule-container" style="border-color: var(--king-red);">
+            <div class="rule-title"><span class="text-king">⚖️</span> Punishment Severity</div>
+            <div class="comparison-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Violation</th>
+                            <th>First Offense</th>
+                            <th>Repeat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Spam / Minor Abuse</td>
+                            <td class="text-emperor">Warn</td>
+                            <td class="text-emperor">Mute</td>
+                        </tr>
+                        <tr>
+                            <td>Harassment / Toxicity</td>
+                            <td class="text-emperor">Mute</td>
+                            <td class="text-king">Temp Ban</td>
+                        </tr>
+                        <tr>
+                            <td>Cheating / Exploits</td>
+                            <td class="text-king">Temp Ban</td>
+                            <td class="text-king">Permanent Ban</td>
+                        </tr>
+                        <tr>
+                            <td>Griefing</td>
+                            <td class="text-king">Ban</td>
+                            <td class="text-king">Permanent Ban</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 WonderCraft SMP | Designed & Developed by <span class="gold-gradient">Shruti Singh</span>
+    </footer>
+
+    <script>
+        // Sakura Petal Logic
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.width = Math.random() * 10 + 5 + 'px';
+            petal.style.height = petal.style.width;
+            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 5000);
+        }
+        setInterval(createPetal, 300);
+    </script>
+</body>
+</html>
