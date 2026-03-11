@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WonderCraft SMP • The Golden Era</title>
+    <title>EsraMC • New Era of Survival</title>
     
     <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. Core Variables & Setup --- */
         :root {
-          --bg: #0a0a0a;
-          --bg-sakura: #1a1215;
-          --sakura: #ffb7c5;
-          --gold: #FFD700;
-          --gold-dark: #B8860B;
-          --glass: rgba(255, 255, 255, 0.05);
-          --border: rgba(255, 183, 197, 0.15);
-          --text: #ffffff;
-          --muted: #a0a0a0;
-          --king-red: #ef4444;
+          --bg: #020617;
+          --bg-accent: #0f172a;
+          --primary-blue: #00d4ff;
+          --secondary-blue: #0052ff;
+          --glass: rgba(255, 255, 255, 0.03);
+          --border: rgba(0, 212, 255, 0.2);
+          --text: #f8fafc;
+          --muted: #94a3b8;
         }
 
         * {
@@ -31,18 +29,24 @@
 
         body {
           background-color: var(--bg);
-          background-image: radial-gradient(circle at top, var(--bg-sakura) 0%, var(--bg) 70%);
+          background-image: radial-gradient(circle at top, var(--bg-accent) 0%, var(--bg) 80%);
           color: var(--text);
           overflow-x: hidden;
           min-height: 100vh;
         }
 
-        /* --- 2. Animations (Sakura Petals) --- */
-        .petal {
+        /* --- 2. Animations --- */
+        @keyframes float {
+          0% { transform: translateY(0px) rotate(-1deg); }
+          50% { transform: translateY(-25px) rotate(1deg); } /* Increased float range */
+          100% { transform: translateY(0px) rotate(-1deg); }
+        }
+
+        .particle {
           position: fixed;
           top: -10%;
-          background-color: var(--sakura);
-          border-radius: 10px 0 10px 10px;
+          background-color: var(--primary-blue);
+          border-radius: 50%;
           opacity: 0.3;
           pointer-events: none;
           z-index: 1;
@@ -50,13 +54,14 @@
         }
 
         @keyframes fall {
-          0% { transform: translateY(0vh) rotate(0deg); opacity: 0.8; }
-          100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+          0% { transform: translateY(0vh) scale(0); opacity: 0.6; }
+          50% { opacity: 0.4; }
+          100% { transform: translateY(100vh) scale(1); opacity: 0; }
         }
 
         /* --- 3. Typography & Gradients --- */
-        .gold-gradient {
-          background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+        .blue-gradient {
+          background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           font-weight: 800;
@@ -76,7 +81,7 @@
 
         .page-nav a {
           padding: 10px 20px;
-          border-radius: 999px;
+          border-radius: 12px;
           text-decoration: none;
           font-weight: 700;
           color: var(--text);
@@ -88,9 +93,10 @@
         }
 
         .page-nav .active {
-          background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-          color: #000;
+          background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+          color: #fff;
           border: none;
+          box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         /* --- 5. Hero Section --- */
@@ -105,9 +111,14 @@
         }
 
         .site-logo {
-            width: 150px;
+            width: 450px; /* Adjust size as needed for your logo image */
+            max-width: 90%; /* For mobile responsiveness */
+            height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 25px var(--sakura));
+            /* Blue shadow and a slight glow effect */
+            filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 30px rgba(0, 212, 255, 0.4));
+            /* Apply the floating animation */
+            animation: float 6s ease-in-out infinite; 
         }
 
         /* --- 6. The Matrix Card System --- */
@@ -116,71 +127,75 @@
 
         .grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 30px;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
           justify-content: center;
         }
 
         .card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 2px solid var(--border);
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid var(--border);
           padding: 40px 30px;
-          border-radius: 3rem;
+          border-radius: 2rem;
           backdrop-filter: blur(15px);
-          transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition: 0.4s ease;
           text-align: center;
         }
 
         .card:hover {
-          transform: translateY(-12px);
-          border-color: var(--gold);
-          box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
+          transform: translateY(-10px);
+          border-color: var(--primary-blue);
+          background: rgba(0, 212, 255, 0.05);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 2rem;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
             margin-bottom: 20px;
-            border: 2px solid var(--border);
+            border: 3px solid var(--border);
             object-fit: cover;
         }
 
         /* --- 7. Buttons & Tiers --- */
-        .btn-gold {
-          background: linear-gradient(90deg, var(--gold-dark), var(--gold));
-          color: #000;
-          font-weight: 900;
+        .btn-blue {
+          background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
+          color: #fff;
+          font-weight: 800;
           text-transform: uppercase;
           border: none;
           padding: 14px 30px;
-          border-radius: 999px;
+          border-radius: 12px;
           cursor: pointer;
           text-decoration: none;
           display: inline-block;
           transition: 0.3s;
           font-size: 0.85rem;
+          letter-spacing: 1px;
         }
 
-        .btn-gold:hover {
-          filter: brightness(1.1);
-          transform: scale(1.05);
-          box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        .btn-blue:hover {
+          filter: brightness(1.2);
+          box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
         }
 
         .role-pill {
             display: inline-block;
-            padding: 4px 15px;
-            border-radius: 999px;
-            font-size: 0.7rem;
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-size: 0.65rem;
             font-weight: 800;
             margin-bottom: 12px;
-            background: var(--glass);
+            background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--border);
+            text-transform: uppercase;
         }
 
-        .text-emperor { color: var(--gold); }
-        .text-king { color: var(--king-red); text-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+        .text-owner { color: #f8fafc; background: var(--secondary-blue); }
+        .text-dev { color: var(--primary-blue); }
+        .text-mod { color: #22c55e; }
+        .text-partner { color: #fbbf24; }
 
         footer { text-align: center; padding: 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
     </style>
@@ -189,94 +204,80 @@
 <body>
 
     <nav class="page-nav">
-        <a href="index.html" class="active">HOME</a>
-        <a href="rules.html">RULES</a>
-        <a href="store.html">STORE</a>
+        <a href="#" class="active">HOME</a>
+        <a href="#">RULES</a>
+        <a href="#">STORE</a>
     </nav>
 
     <header class="hero">
-        <img src="1000023772.png" class="site-logo" alt="WonderCraft SMP Logo">
-        <h1 class="gold-gradient" style="font-size: 4.5rem;">WONDERCRAFT SMP</h1>
-        <p class="italic" style="color: var(--sakura); font-size: 1.1rem; letter-spacing: 1px;">Survival, Refined. The Golden Era Begins.</p>
+        <img src="https://cdn.discordapp.com/attachments/1471972962335854612/1481328929724825764/Picsart_26-03-11_21-56-55-794.png?ex=69b2ea92&is=69b19912&hm=43d0fb7c6ba8949c99616fbe81cf12d6f88656752533d7f345d5b6a07a56d112&" 
+             class="site-logo" 
+             alt="EsraMC Logo">
+        
+        <p class="italic" style="color: var(--primary-blue); font-size: 1.2rem; letter-spacing: 2px; margin-top: 20px;">
+            SURVIVAL REBORN • THE COLD FRONTIER
+        </p>
         
         <div style="margin-top: 40px;">
-            <p style="margin-bottom: 15px; font-weight: 700; color: var(--gold);">🌐 play.wondercraft.in</p>
-            <a href="store.html" class="btn-gold">Explore the Store</a>
+            <p style="margin-bottom: 15px; font-weight: 700; color: #fff; font-size: 1.2rem;">🌐 play.esramc.net</p>
+            <a href="#" class="btn-blue">Join the Discord</a>
         </div>
     </header>
 
     <section id="staff">
-        <h2 class="title gold-gradient">Management Team</h2>
+        <h2 class="title blue-gradient">Executive Team</h2>
         <div class="grid">
             <div class="card">
-                <img src="khanjan.png" alt="Khanjan">
-                <div class="role-pill text-emperor">OWNER</div>
-                <h3>Khanjan Deka ♡</h3>
-                <p style="color: var(--muted); margin-top: 10px;">Visionary Founder</p>
+                <img src="https://api.mineatar.io/body/full/TheCandy" alt="TheCandy">
+                <div class="role-pill text-owner">OWNER</div>
+                <h3>TheCandy</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Project Director</p>
             </div>
 
             <div class="card">
-                <img src="shruti.png" alt="Shruti">
-                <div class="role-pill" style="color: #60a5fa;">DEVELOPER</div>
-                <h3>Shruti Singh ♡</h3>
-                <p style="color: var(--muted); margin-top: 10px;">Systems Architect</p>
+                <img src="https://api.mineatar.io/body/full/Kakashi" alt="Kakashi">
+                <div class="role-pill text-dev">DEVELOPER</div>
+                <h3>Kakashi</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Lead Systems Engineer</p>
             </div>
 
             <div class="card">
-                <img src="nikhil.png" alt="Nikhil">
-                <div class="role-pill" style="color: #60a5fa;">DEVELOPER</div>
-                <h3>Nikhil</h3>
-                <p style="color: var(--muted); margin-top: 10px;">Backend Lead</p>
+                <img src="https://api.mineatar.io/body/full/Nexus" alt="Nexus">
+                <div class="role-pill text-mod">MODERATOR</div>
+                <h3>Nexus</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Community Manager</p>
             </div>
 
             <div class="card">
-                <img src="anshul.png" alt="Anshul">
-                <div class="role-pill text-king">SENIOR ADMIN</div>
-                <h3>Anshul</h3>
-                <p style="color: var(--muted); margin-top: 10px;">Operations Lead</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="creators">
-        <h2 class="title gold-gradient">Official YouTubers</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="prax.png" alt="PraKSH19">
-                <div class="role-pill" style="color: var(--sakura);">YOUTUBER</div>
-                <h3>PraKSH19 GAMing ✔</h3>
-                <a href="https://youtube.com/@praksh19gaming" class="btn-gold" style="margin-top: 15px;">▶ Channel</a>
-            </div>
-
-            <div class="card">
-                <img src="arpit.png" alt="Tiger Arpit">
-                <div class="role-pill" style="color: var(--sakura);">YOUTUBER</div>
-                <h3>Tiger Arpit Gaming ✔</h3>
-                <a href="https://youtube.com/@Tiger_Arpit_Gamingz" class="btn-gold" style="margin-top: 15px;">▶ Channel</a>
+                <img src="https://api.mineatar.io/body/full/Sushant" alt="Sushant">
+                <div class="role-pill text-partner">PARTNER</div>
+                <h3>Sushant (Angara)</h3>
+                <p style="color: var(--muted); margin-top: 10px;">Content Affiliate</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 WonderCraft SMP • Hand-crafted by <span class="gold-gradient">Nexus sideryt_</span></p>
+        <p>&copy; 2026 EsraMC Network • Designed for <span class="blue-gradient">The Best Experience</span></p>
     </footer>
 
     <script>
-        // Sakura Petal Generator
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.width = Math.random() * 10 + 5 + 'px';
-            petal.style.height = petal.style.width;
-            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
-            document.body.appendChild(petal);
+        // Blue Particle Generator
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 6 + 2 + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            particle.style.animationDuration = Math.random() * 4 + 3 + 's';
+            document.body.appendChild(particle);
 
             setTimeout(() => {
-                petal.remove();
-            }, 5000);
+                particle.remove();
+            }, 7000);
         }
-        setInterval(createPetal, 350);
+        setInterval(createParticle, 200);
     </script>
 </body>
 </html>
