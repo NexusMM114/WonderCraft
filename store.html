@@ -3,325 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WonderCraft SMP • Donator Ranks</title>
-    <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>EsraMC • Premium Store</title>
     
+    <link href="https://fonts.bunny.net/css?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        /* --- 1. Your Core CSS Variables & Setup --- */
+        /* --- 1. Core Variables (New Blue Glass Theme) --- */
         :root {
-          --bg: #0a0a0a;
-          --bg-sakura: #1a1215;
-          --sakura: #ffb7c5;
-          --gold: #FFD700;
-          --gold-dark: #B8860B;
-          --glass: rgba(255, 255, 255, 0.05);
-          --border: rgba(255, 183, 197, 0.15);
-          --text: #ffffff;
-          --muted: #a0a0a0;
-          --king-red: #ef4444;
+          /* Colors based on your input */
+          --bg-dark: #030712;        /* Near black */
+          --bg-blue-dark: #1e3a8a;   /* Dark Blue */
+          --bg-blue-light: #60a5fa;  /* Light Blue */
+          --primary-cyan: #00d4ff;   /* Accent Cyan */
+          
+          /* Glassmorphism Variables */
+          --glass-bg: rgba(255, 255, 255, 0.03);
+          --glass-border: rgba(255, 255, 255, 0.08);
+          --glass-shine: rgba(0, 212, 255, 0.1);
+          --blur: blur(12px);
+          
+          /* Text Colors */
+          --text-main: #f8fafc;
+          --text-muted: #94a3b8;
+          --text-on-cyan: #000;
+          
+          /* Structurals */
+          --font-family: 'Montserrat', sans-serif;
+          --border-radius-lg: 16px;
+          --border-radius-sm: 8px;
+          --transition: 0.3s ease;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Space Grotesk", sans-serif; }
+        /* --- 2. Global Reset & Setup --- */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: var(--font-family);
+          -webkit-font-smoothing: antialiased;
+        }
 
         body {
-          background-color: var(--bg);
-          background-image: radial-gradient(circle at top, var(--bg-sakura) 0%, var(--bg) 70%);
-          color: var(--text);
+          background-color: var(--bg-dark);
+          /* Subtle radial gradient background */
+          background-image: radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.3) 0%, rgba(3, 7, 18, 1) 90%);
+          color: var(--text-main);
           overflow-x: hidden;
           min-height: 100vh;
+          padding-bottom: 100px; /* Space for footer */
         }
 
-        /* --- 2. Animations (Sakura Petals) --- */
-        .petal {
-          position: fixed;
-          top: -10%;
-          background-color: var(--sakura);
-          border-radius: 10px 0 10px 10px;
-          opacity: 0.3;
-          pointer-events: none;
-          z-index: 1;
-          animation: fall linear infinite;
-        }
-        @keyframes fall {
-          0% { transform: translateY(0vh) rotate(0deg); opacity: 0.8; }
-          100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        button { cursor: pointer; border: none; background: none; transition: var(--transition); }
+
+        /* --- 3. Animations --- */
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(-1deg); }
+          50% { transform: translateY(-15px) rotate(1deg); }
         }
 
-        /* --- 3. Typography & Gradients --- */
-        .gold-gradient {
-          background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        /* --- 4. Navigation & Back Button --- */
-        .page-nav {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          display: flex;
-          gap: 10px;
-          z-index: 999;
-        }
-
-        .page-nav a {
-          padding: 10px 20px;
-          border-radius: 999px;
-          text-decoration: none;
-          font-weight: 700;
-          color: var(--text);
-          background: var(--glass);
-          border: 1px solid var(--border);
-          backdrop-filter: blur(10px);
-          font-size: 0.75rem;
-          transition: 0.3s;
-        }
-
-        .page-nav .active {
-          background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-          color: #000;
-          border: none;
-        }
-
-        .back-btn {
-          position: fixed;
-          top: 20px;
-          left: 20px;
-          z-index: 999;
-          padding: 10px 20px;
-          border-radius: 999px;
-          text-decoration: none;
-          color: var(--text);
-          background: var(--glass);
-          border: 1px solid var(--border);
-          backdrop-filter: blur(10px);
-          font-weight: 700;
-          font-size: 0.75rem;
-        }
-
-        /* --- 5. Billing Toggle --- */
-        .billing-toggle {
-          margin: 40px auto;
+        /* --- 4. Header & Top Nav --- */
+        header {
           width: 100%;
-          max-width: 450px;
+          padding: 20px 10%;
           display: flex;
-          background: var(--glass);
-          border: 1px solid var(--border);
-          border-radius: 999px;
-          padding: 5px;
-        }
-        .billing-toggle button {
-          flex: 1;
-          padding: 12px 0;
-          border: none;
-          background: none;
-          font-weight: 800;
-          color: var(--muted);
-          cursor: pointer;
-          transition: 0.3s;
-          border-radius: 999px;
-        }
-        .billing-toggle button.active {
-          background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-          color: #000;
+          justify-content: space-between;
+          align-items: center;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1000;
+          background: var(--glass-bg);
+          backdrop-filter: var(--blur);
+          border-bottom: 1px solid var(--glass-border);
         }
 
-        /* --- 6. Rank Cards (Shop Box Style) --- */
-        .rank-grid {
-          padding: 40px 8% 100px;
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .back-btn {
+          font-size: 1.2rem;
+          color: var(--primary-cyan);
+          padding: 10px;
+          border-radius: 50%;
+        }
+        .back-btn:hover { background: rgba(0, 212, 255, 0.1); }
+
+        .logo-small { height: 40px; }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        
+        .cart-status {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          padding: 10px 20px;
+          border-radius: var(--border-radius-sm);
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-weight: 600;
+        }
+        .cart-status i { color: var(--primary-cyan); }
+        .cart-count { color: var(--primary-cyan); }
+
+        .player-head {
+          width: 40px;
+          height: 40px;
+          border-radius: var(--border-radius-sm);
+          border: 2px solid var(--glass-border);
+        }
+
+        /* --- 5. Main Layout --- */
+        .main-container {
+          margin-top: 120px; /* Space for fixed header */
+          padding: 0 10%;
           display: grid;
-          gap: 30px;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: 280px 1fr;
+          gap: 40px;
+          align-items: start;
         }
 
-        .rank-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 2px solid var(--border);
-          padding: 45px 35px;
-          border-radius: 3rem;
-          backdrop-filter: blur(15px);
-          transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* --- 6. Sidebar (Categories) --- */
+        .sidebar {
+          position: sticky;
+          top: 120px;
+          background: var(--glass-bg);
+          backdrop-filter: var(--blur);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--border-radius-lg);
+          padding: 20px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-title {
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: var(--text-muted);
+          margin-bottom: 15px;
+          font-weight: 700;
+          padding-left: 10px;
+        }
+
+        .category-list li a {
+          display: block;
+          padding: 12px 15px;
+          border-radius: var(--border-radius-sm);
+          font-weight: 600;
+          color: var(--text-main);
+          margin-bottom: 5px;
+        }
+
+        .category-list li a:hover {
+          background: rgba(255, 255, 255, 0.05);
+          color: var(--primary-cyan);
+        }
+
+        /* The Active State (Working CSS) */
+        .category-list li.active a {
+          background: linear-gradient(90deg, var(--bg-blue-dark), rgba(0, 212, 255, 0.2));
+          color: #fff;
+          border-left: 4px solid var(--primary-cyan);
+          box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+
+        /* --- 7. Content Area --- */
+        .content-area {
           display: flex;
           flex-direction: column;
-          position: relative;
-        }
-        .rank-card:hover {
-          transform: translateY(-12px);
-          border-color: var(--gold);
-          box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
+          gap: 30px;
         }
 
-        .rank-card h3 { font-size: 2rem; font-weight: 900; text-align: center; }
-        .price { font-size: 2.2rem; font-weight: 900; text-align: center; margin: 15px 0; color: var(--gold); }
-        
-        .rank-card ul { list-style: none; margin: 20px 0; flex-grow: 1; }
-        .rank-card li { margin-bottom: 12px; color: var(--muted); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
-        .rank-card li::before { content: "🌸"; font-size: 0.7rem; color: var(--sakura); }
-
-        .cmd {
-          background: rgba(0,0,0,0.4);
-          padding: 15px;
-          border-radius: 1.2rem;
-          font-size: 0.8rem;
-          color: var(--muted);
-          margin-bottom: 25px;
-          border: 1px solid var(--border);
-        }
-
-        /* --- 7. Buttons & Tiers --- */
-        .btn-gold {
-          background: linear-gradient(90deg, var(--gold-dark), var(--gold));
-          color: #000;
-          font-weight: 900;
-          text-transform: uppercase;
-          border: none;
-          padding: 16px;
-          border-radius: 999px;
-          text-decoration: none;
+        /* Hero/Welcome Section */
+        .store-hero {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--border-radius-lg);
+          padding: 40px;
           text-align: center;
-          transition: 0.3s;
+          position: relative;
+          overflow: hidden;
         }
-        .btn-gold:hover { filter: brightness(1.1); transform: scale(1.02); }
-
-        .badge {
+        
+        /* Subtle glow effect behind logo */
+        .store-hero::before {
+          content: '';
           position: absolute;
-          top: 25px;
-          right: 25px;
-          background: var(--gold);
-          color: #000;
-          padding: 5px 15px;
-          border-radius: 999px;
-          font-size: 0.7rem;
-          font-weight: 900;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          width: 300px; height: 300px;
+          background: var(--primary-cyan);
+          filter: blur(100px);
+          opacity: 0.1;
+          z-index: 0;
         }
 
-        .text-titan { color: #60a5fa; }
-        .text-emperor { color: var(--gold); }
-        .text-superior { color: #a855f7; }
-        .text-king { color: var(--king-red); text-shadow: 0 0 10px rgba(239, 68, 68, 0.1); }
+        .main-logo {
+          width: 350px;
+          max-width: 100%;
+          height: auto;
+          margin-bottom: 20px;
+          animation: float 6s ease-in-out infinite;
+          position: relative;
+          z-index: 1;
+        }
 
-        footer { text-align: center; padding: 50px; border-top: 1px solid var(--border); color: var(--muted); }
+        .hero-text {
+          color: var(--text-muted);
+          font-size: 1rem;
+          line-height: 1.6;
+          max-width: 600px;
+          margin: 0 auto;
+          position: relative; z-index: 1;
+        }
+
+        /* Package Grid */
+        .package-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 20px;
+        }
+
+        /* --- 8. Package Card (Glass Edition) --- */
+        .package-card {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--border-radius-lg);
+          padding: 25px;
+          transition: var(--transition);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Shine effect on hover */
+        .package-card::after {
+          content: '';
+          position: absolute;
+          top: -50%; left: -50%;
+          width: 200%; height: 200%;
+          background: radial-gradient(circle, var(--glass-shine) 0%, rgba(255,255,255,0) 70%);
+          opacity: 0;
+          transition: var(--transition);
+          transform: rotate(30deg);
+        }
+
+        .package-card:hover {
+          transform: translateY(-5px);
+          border-color: var(--primary-cyan);
+          box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+        }
+        
+        .package-card:hover::after { opacity: 1; top: -20%; left: -20%; }
+
+        .package-icon {
+          width: 100px;
+          height: 100px;
+          margin-bottom: 15px;
+          object-fit: contain;
+          /* Filter to make icons look cooler on dark bg */
+          filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+        }
+
+        .package-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
+        .package-raw-price { font-size: 0.9rem; color: var(--primary-cyan); font-weight: 800; margin-bottom: 20px; }
+
+        .package-actions {
+          width: 100%;
+          display: flex;
+          gap: 10px;
+          margin-top: auto; /* Push to bottom of card */
+        }
+
+        .btn-info {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          color: var(--primary-cyan);
+          width: 45px;
+          height: 45px;
+          border-radius: var(--border-radius-sm);
+          display: flex; align-items: center; justify-content: center;
+        }
+        .btn-info:hover { background: rgba(0, 212, 255, 0.1); border-color: var(--primary-cyan); }
+
+        .btn-add {
+          background: linear-gradient(135deg, var(--bg-blue-dark), var(--primary-cyan));
+          color: #fff;
+          font-weight: 700;
+          flex-grow: 1;
+          height: 45px;
+          border-radius: var(--border-radius-sm);
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+        .btn-add:hover { filter: brightness(1.1); box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); }
+
+        /* --- 9. Footer --- */
+        footer {
+          width: 100%;
+          padding: 30px 10%;
+          background: var(--glass-bg);
+          backdrop-filter: var(--blur);
+          border-top: 1px solid var(--glass-border);
+          text-align: center;
+          color: var(--text-muted);
+          font-size: 0.8rem;
+          margin-top: auto;
+          position: fixed;
+          bottom: 0; left: 0;
+          z-index: 10;
+        }
+
+        /* --- 10. Responsive Design --- */
+        @media (max-width: 1024px) {
+          .main-container { grid-template-columns: 1fr; }
+          .sidebar { position: static; margin-bottom: 30px; }
+          .category-list { display: flex; flex-wrap: wrap; gap: 10px; }
+          .category-list li a { margin-bottom: 0; }
+          header, footer { padding: 20px 5%; }
+        }
     </style>
 </head>
 
 <body>
 
-    <a href="index.html" class="back-btn">← BACK</a>
-
-    <nav class="page-nav">
-        <a href="index.html">HOME</a>
-        <a href="rules.html">RULES</a>
-        <a href="Rank.html" class="active">STORE</a>
-    </nav>
-
-    <header style="text-align: center; padding: 120px 20px 20px;">
-        <h1 class="gold-gradient" style="font-size: 3.5rem; font-weight: 900;">Donator Ranks</h1>
-        <p style="color: var(--sakura); font-style: italic;">Select duration • Prices update automatically</p>
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <img src="https://i.ibb.co/gMkjzj79/Picsart-26-03-11-21-56-55-794.png" class="logo-small" alt="EsraMC">
+        </div>
+        <div class="header-right">
+            <div class="cart-status">
+                <i class="fas fa-shopping-cart"></i>
+                Cart: <span class="cart-count">0</span> Items
+            </div>
+            <img src="https://api.mineatar.io/head/steve" class="player-head" alt="Player">
+        </div>
     </header>
 
-    <div class="billing-toggle">
-        <button class="active" onclick="setDuration(1, this)">1 Month</button>
-        <button onclick="setDuration(2, this)">2 Months</button>
-        <button onclick="setDuration(3, this)">3 Months</button>
+    <div class="main-container">
+        
+        <nav class="sidebar">
+            <h2 class="category-title">Select Category</h2>
+            <ul class="category-list" id="categoryList">
+                <li class="active"><a href="#" onclick="changeCategory(this, 'lifesteal_coins')">Coins [LifeSteal]</a></li>
+                <li><a href="#" onclick="changeCategory(this, 'lifesteal_ranks')">Lifesteal Ranks</a></li>
+                <li><a href="#" onclick="changeCategory(this, 'classic_coins')">Coins [Classic]</a></li>
+                <li><a href="#" onclick="changeCategory(this, 'classic_ranks')">Classic Ranks</a></li>
+            </ul>
+        </nav>
+
+        <main class="content-area">
+            
+            <section class="store-hero">
+                <img src="https://i.ibb.co/gMkjzj79/Picsart-26-03-11-21-56-55-794.png" class="main-logo" alt="EsraMC Logo">
+                <p class="hero-text">Welcome to the official EsraMC Store. All purchases directly support the server's development and hosting. Please select a category from the sidebar to begin browsing.</p>
+            </section>
+
+            <section class="package-grid">
+                
+                <div class="package-card">
+                    <img src="https://i.imgur.com/uG5K6fD.png" class="package-icon" alt="15600 Coins">
+                    <h3 class="package-title">15600 Coins (LIFESTEAL)</h3>
+                    <p class="package-raw-price">12.20 USD</p>
+                    <div class="package-actions">
+                        <button class="btn-info"><i class="fas fa-info"></i></button>
+                        <button class="btn-add" onclick="addToCart()">+ Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <img src="https://i.imgur.com/8N4J9F4.png" class="package-icon" alt="7800 Coins">
+                    <h3 class="package-title">7800 Coins (LIFESTEAL)</h3>
+                    <p class="package-raw-price">6.50 USD</p>
+                    <div class="package-actions">
+                        <button class="btn-info"><i class="fas fa-info"></i></button>
+                        <button class="btn-add" onclick="addToCart()">+ Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <img src="https://i.imgur.com/S5Y9UaT.png" class="package-icon" alt="Supreme Rank">
+                    <h3 class="package-title">Supreme Rank (LS)</h3>
+                    <p class="package-raw-price">22.00 USD</p>
+                    <div class="package-actions">
+                        <button class="btn-info"><i class="fas fa-info"></i></button>
+                        <button class="btn-add" onclick="addToCart()">+ Add to cart</button>
+                    </div>
+                </div>
+
+                 <div class="package-card">
+                    <img src="https://i.imgur.com/uG5K6fD.png" class="package-icon" alt="Key Package">
+                    <h3 class="package-title">Mythic Key Package</h3>
+                    <p class="package-raw-price">4.99 USD</p>
+                    <div class="package-actions">
+                        <button class="btn-info"><i class="fas fa-info"></i></button>
+                        <button class="btn-add" onclick="addToCart()">+ Add to cart</button>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
     </div>
 
-    <section class="rank-grid">
-        <div class="rank-card">
-            <h3>VETERAN</h3>
-            <span class="price" data-base="99">₹99</span>
-            <ul>
-                <li>2× Backpack Rows</li>
-                <li>5× Homes</li>
-                <li>2× Chat Colours</li>
-                <li>100× Gems</li>
-            </ul>
-            <p class="cmd">/craft • /nick • /fly (claim)</p>
-            <a href="https://discord.gg/wondercraft" class="btn-gold">Buy via Discord</a>
-        </div>
-
-        <div class="rank-card">
-            <h3 class="text-titan">TITAN</h3>
-            <span class="price" data-base="499" style="color: #60a5fa;">₹499</span>
-            <ul>
-                <li>3× Backpack Rows</li>
-                <li>7× Homes</li>
-                <li>300× Gems</li>
-                <li>Titan Reward Access</li>
-            </ul>
-            <p class="cmd">/craft • /recipe • /anvil • /fly (claim)</p>
-            <a href="https://discord.gg/wondercraft" class="btn-gold">Buy via Discord</a>
-        </div>
-
-        <div class="rank-card">
-            <h3 class="text-emperor">EMPEROR</h3>
-            <span class="price" data-base="999">₹999</span>
-            <ul>
-                <li>4× Backpack Rows</li>
-                <li>8× Homes</li>
-                <li>18× EGlow Colours</li>
-                <li>500× Gems</li>
-            </ul>
-            <p class="cmd">/near • /nick • /anvil • /enderchest • /fly</p>
-            <a href="https://discord.gg/wondercraft" class="btn-gold">Buy via Discord</a>
-        </div>
-
-        <div class="rank-card">
-            <h3 class="text-superior">SUPERIOR</h3>
-            <span class="price" data-base="1999" style="color: #a855f7;">₹1999</span>
-            <ul>
-                <li>5× Backpack Rows</li>
-                <li>9× Homes</li>
-                <li>ColourChat (Limited)</li>
-                <li>800× Gems</li>
-            </ul>
-            <p class="cmd">/stonecutter • /grindstone • /fly • /feed</p>
-            <a href="https://discord.gg/wondercraft" class="btn-gold">Buy via Discord</a>
-        </div>
-
-        <div class="rank-card" style="border-color: var(--gold);">
-            <div class="badge">BEST VALUE</div>
-            <h3 class="text-king">KING</h3>
-            <span class="price" data-base="4499" style="color: var(--king-red);">₹4499</span>
-            <ul>
-                <li>2× Survival XP Multiplier</li>
-                <li>6× Backpack Rows</li>
-                <li>Max Homes</li>
-                <li>ColourChat (Full)</li>
-                <li>1000× Gems</li>
-                <li>All Previous Rank Perks</li>
-            </ul>
-            <p class="cmd">Includes every paid rank perk</p>
-            <a href="https://discord.gg/wondercraft" class="btn-gold">Buy via Discord</a>
-        </div>
-    </section>
-
     <footer>
-        © 2026 WonderCraft SMP | Designed by <span class="gold-gradient">Shruti Singh</span>
+        <p>&copy; 2026 EsraMC Network • Hand-crafted for <span style="color:var(--primary-cyan)">The Best Experience</span></p>
     </footer>
 
     <script>
-        // Sakura Petal Generator
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.width = Math.random() * 10 + 5 + 'px';
-            petal.style.height = petal.style.width;
-            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
-            document.body.appendChild(petal);
-            setTimeout(() => { petal.remove(); }, 5000);
-        }
-        setInterval(createPetal, 300);
+        // Managing Cart Count (Working But Basic)
+        let cartCount = 0;
+        const cartCountSpan = document.querySelector('.cart-count');
 
-        // Price Update Logic
-        function setDuration(months, btn) {
-            document.querySelectorAll(".billing-toggle button").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            document.querySelectorAll(".price").forEach(p => {
-                const base = parseInt(p.dataset.base);
-                p.textContent = "₹" + (base * months);
-            });
+        function addToCart() {
+            cartCount++;
+            cartCountSpan.innerText = cartCount;
+            // Add a temporary glow effect to cart status
+            const status = document.querySelector('.cart-status');
+            status.style.borderColor = 'var(--primary-cyan)';
+            status.style.background = 'rgba(0, 212, 255, 0.1)';
+            setTimeout(() => {
+                status.style.borderColor = 'var(--glass-border)';
+                status.style.background = 'var(--glass-bg)';
+            }, 500);
+        }
+
+        // Managing Active Sidebar State (Working CSS State Management)
+        function changeCategory(element, categoryId) {
+            // 1. Remove active class from all list items
+            const items = document.querySelectorAll('.category-list li');
+            items.forEach(item => item.classList.remove('active'));
+
+            // 2. Add active class to the parent 'li' of the clicked 'a'
+            element.parentElement.classList.add('active');
+
+            // 3. (Optional) In a real store, you would use 'categoryId' 
+            // to fetch or reveal different package grids here.
+            console.log("Loading Category: " + categoryId);
         }
     </script>
+
 </body>
 </html>
